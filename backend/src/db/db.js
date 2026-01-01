@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 
-const DB_URI = process.env.DB_URI;
-const DB_NAME = "bmdu_crud_test";
+// console.log(`${DB_URI}/${DB_NAME}`);
 
 export const connectDB = async () => {
+  const DB_URI = process.env.DB_URI;
+  const DB_NAME = "bmdu_crud_test";
+
+  console.log(`${DB_URI}/${DB_NAME}`);
   try {
     await mongoose.connect(`${DB_URI}/${DB_NAME}`);
     console.log("DB connected");
