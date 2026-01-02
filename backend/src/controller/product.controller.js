@@ -47,3 +47,19 @@ export const getAllProducts = async (req, res) => {
 
   return res.status(200).json(new ApiResponse(200, "Success", allProducts));
 };
+
+export const getProduct = async (req, res) => {
+  const { id } = req.params;
+  console.log("id", id, typeof id);
+
+  if (!id || id === "") {
+    throw new ApiError(400, "Product id is required");
+  }
+
+  const product = await Product.findById(id);
+  if (!product) {
+    throw new ApiError(400, "Invalid id or product does not exist anymore");
+  }
+
+  return res.status(200).json(new ApiResponse(200, "Success", product));
+};
