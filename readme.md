@@ -18,6 +18,8 @@ dotenv
 CORS
 
 📁 Project Structure
+
+<pre>
 backend/
 ├── src/
 │ ├── controller/ # Business logic
@@ -33,6 +35,7 @@ backend/
 ├── .env
 ├── package.json
 └── package-lock.json
+</pre>
 
 Getting Started
 1️⃣ Clone the Repository
