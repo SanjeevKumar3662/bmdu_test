@@ -63,3 +63,68 @@ export const getProduct = async (req, res) => {
 
   return res.status(200).json(new ApiResponse(200, "Success", product));
 };
+
+export const updateProduct = async (req, res) => {
+  const { id } = req.params;
+  const { name, description, price, category, stock, imageUrl = "" } = req.body;
+  // console.log("body:", name, description, price, category, stock, imageUrl);
+
+  if (
+    !id ||
+    !name ||
+    !description ||
+    price === undefined ||
+    !category ||
+    stock === undefined
+  ) {
+    throw new ApiError(400, `All feilds are requeried except imageUrl`);
+  }
+
+  const product = await Product.findByIdAndUpdate(
+    id,
+    {
+      name,
+      description,
+      price,
+      category,
+      stock,
+      imageUrl,
+    },
+    { new: true, runValidators: true }
+  );
+
+  if (!product) {
+    throw new ApiError(400, "Failed to find the product");
+  }
+
+  if (!product) {
+    throw new ApiError(
+      500,
+      "Failed to update this product / try again sometime later"
+    );
+  }
+
+  return res.status(201).json(new ApiResponse(201, "Product Updated", product));
+};
+
+export const deleteProduct = async (req, res) => {
+  const { id } = req.params;
+
+  if (!id) {
+    throw new ApiError(200, "Product id is required");
+  }
+
+  const isProductExist = await Product.findById(id);
+
+  if (!isProductExist) {
+    throw new ApiError(400, "Product does not exist");
+  }
+
+  const product = await Product.deleteOne({ _id: id });
+
+  if (!product) {
+    throw new ApiError(500, "Failed to delete product / try again later");
+  }
+
+  return res.status(200).json(new ApiResponse(200, "Product deleted", product));
+};
