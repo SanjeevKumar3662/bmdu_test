@@ -71,17 +71,23 @@ GET /products/:id Fetch a product by ID
 PATCH /products/:id Update product details
 DELETE /products/:id Delete a product
 📤 Sample Request (Create Product)
-`{
+
+<pre>
+{
 "name": "Laptop",
 "description": "High performance laptop",
 "price": 55000,
 "category": "Electronics",
 "stock": 5,
 "imageUrl": ""
-}`
+}
+</pre>
 
 📥 Sample Success Response
-`{
+
+<pre>
+
+
 "success": true,
 "message": "Product Created",
 "data": {
@@ -89,7 +95,8 @@ DELETE /products/:id Delete a product
 "name": "Laptop",
 "price": 55000
 }
-}`
+
+</pre>
 
 ⚠️ Error Handling Strategy
 
@@ -103,11 +110,15 @@ Safe production responses (no sensitive data leakage)
 
 Example error response:
 
-`{
+<pre>
+
+{
 "success": false,
 "message": "Product does not exist"
 }
-`
+
+</pre>
+
 🔐 Status Codes Used
 
 200 – Success
